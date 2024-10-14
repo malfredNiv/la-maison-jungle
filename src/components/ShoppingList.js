@@ -1,6 +1,7 @@
-import { Fragment } from "react";
 import { plantList } from "../datas/plantList";
 import "../styles/ShoppingList.css";
+import PlantItem from "./PlantItem";
+
 function ShoppingList() {
   const categories = plantList.reduce((previousValue, currentValue) => {
     if (!previousValue.includes(currentValue.category)) {
@@ -17,15 +18,14 @@ function ShoppingList() {
         ))}
       </ul>
       <ul className="lmj-plant-list">
-        {plantList.map((plant) => (
-          <Fragment>
-            <li className="lmj-plant-item" key={plant.id}>
-              {plant.name} {plant.isBestSale && <span>🔥</span>}
-              {plant.isSpecialOffer && (
-                <div className="lmj-sales">Soldes</div>
-              )}
-            </li>
-          </Fragment>
+        {plantList.map(({ name, id, cover, light, water }) => (
+          <PlantItem
+            name={name}
+            id={id}
+            cover={cover}
+            light={light}
+            water={water}
+          />
         ))}
       </ul>
     </div>
@@ -33,14 +33,3 @@ function ShoppingList() {
 }
 
 export default ShoppingList;
-// function ShoppingList() {
-//     return (
-//         <ul>
-//             {plantList.map((plant, index) => (
-//                 <li key={`${plant}-${index}`}>{plant}</li>
-//             ))}
-//         </ul>
-//     )
-// }
-
-// export default ShoppingList
